@@ -1,25 +1,19 @@
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+
+import { cartContext } from "../App";
 
 const Navbar = () => {
+  const cart = useContext(cartContext);
+  const numberOfCartItems = cart.cartItems.length;
+
   return (
-    <nav className="fixed w-full flex justify-between items-center shadow-sm h-14 px-8 sm:px-14 bg-red-700 text-white">
+    <nav className="z-10 fixed w-full flex justify-between items-center shadow-sm h-16 px-8 sm:px-14 md:px-24 lg:px-36 bg-red-700 text-white">
       <Link to="/" className="uppercase font-bold text-2xl">
         Shooes
       </Link>
-
-      <ul className="hidden sm:flex items-center">
-        <Link className="ml-5" to="/products">
-          Products
-        </Link>
-        <Link className="ml-5" to="/about">
-          About
-        </Link>
-        <Link className="ml-5" to="/contact">
-          Contact
-        </Link>
-      </ul>
       <Link
-        className="ml-5 flex items-center gap-x-2 bg-white text-black py-1 px-3 rounded-lg"
+        className="flex items-center gap-x-2 bg-white text-black py-1 px-3 rounded-lg"
         to="/cart"
       >
         <svg
@@ -36,22 +30,8 @@ const Navbar = () => {
             d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
           />
         </svg>
-        <span>2</span>
+        <span>{numberOfCartItems}</span>
       </Link>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-6 w-6 sm:hidden"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M4 6h16M4 12h16M4 18h16"
-        />
-      </svg>
     </nav>
   );
 };
